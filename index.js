@@ -1,6 +1,7 @@
 const fs = require('fs')
 const http = require('http')
 const socket = require('socket.io')
+const gameServer = require('./src/app')
 
 const app = http.createServer(handler)
 const io = socket(app)
@@ -20,9 +21,4 @@ function handler(req, res) {
   });
 }
 
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world'})
-  socket.on('status', function (data) {
-    console.log(data);
-  })
-})
+gameServer(io)

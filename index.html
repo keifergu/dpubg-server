@@ -11,9 +11,18 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io('http://localhost:8010');
-  socket.on('news', function (data) {
+  socket.emit('create_player', {
+    name: 'tanbowen',
+  });
+  socket.emit('attributes', {
+    position: {
+      x: 12,
+      y: 20
+    },
+    health: 20,
+  })
+  socket.on('attributes', function (data) {
     console.log(data);
-    socket.emit('status', { my: 'data' });
   });
 </script>
 </body>
